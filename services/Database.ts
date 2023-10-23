@@ -1,0 +1,19 @@
+import mongoose from "mongoose";
+
+let isDBConnected = false;
+
+const ConnectToDB = async () => {
+    if (isDBConnected === true) {
+        console.log('MongoDB is already Alive.....');
+        return;
+    }
+    try {
+        await mongoose.connect(process.env.MONGODB_URI as string);
+        isDBConnected = true;
+        console.log('MongoDB Connected Successfully and is Alive.....');
+    } catch (error) {
+        console.log('Some Error Occurd While Connecting to MongoDB!!!', error)
+    }
+}
+
+export default ConnectToDB;
