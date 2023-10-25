@@ -3,7 +3,7 @@ import cloudinaryConfig from "@src/cloudinary.config";
 cloudinary.v2.config(cloudinaryConfig);
 
 import ConnectToDB from "@src/services/Database";
-import User from "@src/models/user";
+import User from "@src/models/user.model";
 
 // ? Create User Data
 export async function POST(req: Request) {
