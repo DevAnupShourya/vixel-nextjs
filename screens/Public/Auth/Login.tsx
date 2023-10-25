@@ -47,7 +47,10 @@ export default function Login() {
       <CardFooter className="flex flex-col gap-4">
         <Button
           onClick={() => {
-            signIn("github", { callbackUrl: "/login/onboarding" , redirect : true });
+            signIn("github", {
+              callbackUrl: "/feed",
+              redirect: true,
+            });
           }}
           type="submit"
           fullWidth
@@ -60,7 +63,10 @@ export default function Login() {
         </Button>
         <Button
           onClick={() => {
-            signIn("google", { callbackUrl: "/login/onboarding" , redirect : true });
+            signIn("google", {
+              callbackUrl: "/feed",
+              redirect: true,
+            });
           }}
           type="submit"
           fullWidth

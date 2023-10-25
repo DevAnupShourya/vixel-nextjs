@@ -49,22 +49,22 @@ export async function POST(req: Request) {
         }
 
 
-    } catch (error) {
-        console.error(error);
-        return new Response('Error !!!', { statusText: `Some Error Occurd While Saving User Data : ${error}`, status: 500 });
+    } catch (error: any) {
+        console.error(error.message);
+        return new Response('Error !!!', { statusText: `Some Error Occurd While Saving User Data : ${error.message}`, status: 500 });
     }
 }
 
 // ? Get User Data
 export async function GET(req: Request) {
     try {
-        const data = req.headers;
-
+        const request = req.headers;
+        
         // ? Connect To DB
         await ConnectToDB();
 
         // ? Checking if User is authorised or not
-        const userData = await User.findOne({ email: data?.get('email') }, '-_id name username avatarUrl isOnboardingComplete');
+        const userData = await User.findOne({ email: request.get('email') }, '-_id name username avatarUrl isOnboardingComplete');
 
         if (userData === null) {
             return new Response('User Not Found', { status: 401 });

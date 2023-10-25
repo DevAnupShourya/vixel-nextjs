@@ -61,7 +61,7 @@ export const authOptions: AuthOptions = {
         })
     ],
     callbacks: {
-        async signIn({ profile }) {
+        signIn: async ({ profile }) => {
             try {
                 // ? Connect To DB
                 await ConnectToDB();
@@ -80,20 +80,22 @@ export const authOptions: AuthOptions = {
                         bio: 'Your Bio',
                         avatar: profile?.image,
                         coverPic: '',
-                        updatedAt: Date.now(),
-                        gender : null
+                        gender: null
                     })
                     return true;
                 } else {
-                    console.log('user was already available')
+                    console.log('User Already Available!!!!')
                     return true;
                 }
 
-            } catch (error) {
-                console.log('Some Error occurd While Signing In!!!' , error)
+            } catch (error: any) {
+                console.log('Some Error occurd While Signing In!!!', error.message)
                 return false;
             }
         },
+    },
+    session: {
+        strategy: 'jwt',
     },
     pages: {
         signIn: '/login',

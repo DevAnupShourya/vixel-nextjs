@@ -28,7 +28,7 @@ export default function ProfileDropdown() {
   // ? Redux States
   const dispatch = useDispatch();
   const route = useRouter();
-  const userEmail = useSession().data?.user?.email;
+  const userMail = useSession().data?.user?.email;
 
   const [userData, setUserData] = React.useState({
     profileImgUrl: "",
@@ -39,11 +39,11 @@ export default function ProfileDropdown() {
   React.useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("/api/users/", {
+        const response = await fetch(`/api/users`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            email: userEmail as string,
+            email: userMail as string,
           },
         });
 
@@ -57,13 +57,13 @@ export default function ProfileDropdown() {
         } else {
           console.error("Unable to get user data!!", response.text);
         }
-      } catch (error) {
-        console.error("Error while getting user data!!", error);
+      } catch (error: any) {
+        console.error("Error while getting user data!!", error.message);
       }
     };
 
     fetchUserData();
-  }, [userEmail]);
+  }, [userMail]);
 
   const handleLogout = async () => {
     const singout = await signOut({ redirect: true });

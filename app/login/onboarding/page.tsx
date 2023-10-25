@@ -24,8 +24,7 @@ import Countries from "@src/utils/Constants/country_list";
 import { useSession } from "next-auth/react";
 
 // ? Redux
-import type { RootState } from "@src/store/redux";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { showAlert } from "@src/store/alert/alertSlice";
 
 import { useRouter } from "next/navigation";
@@ -149,12 +148,12 @@ export default function OnboardingPage() {
           })
         );
       }
-    } catch (error) {
+    } catch (error : any) {
       dispatch(
         showAlert({
           show: true,
           type: "danger",
-          msg: `Error : ${error}`,
+          msg: `Error : ${error.message}`,
         })
       );
     }
