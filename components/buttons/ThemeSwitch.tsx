@@ -1,18 +1,14 @@
-"use client";
-
 import { Switch } from "@nextui-org/react";
 import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 
-// ? Recoil
-import { useRecoilState } from "recoil";
-import { themeState } from "@src/store/atoms/theme";
+// ? Redux
+import type { RootState } from '@src/store/redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleTheme } from '@src/store/theme/themeSlice';
 
 const ThemeSwitch = () => {
-  const [theme, setTheme] = useRecoilState(themeState);
-
-  const handleThemeChange = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
+  const theme = useSelector((state: RootState) => state.theme.mode)
+  const dispatch = useDispatch()
 
   return (
     <Switch
@@ -22,7 +18,7 @@ const ThemeSwitch = () => {
       className="text-light-main dark:text-dark-main"
       startContent={<BsFillMoonStarsFill />}
       endContent={<BsFillSunFill />}
-      onClick={handleThemeChange}
+      onClick={() => dispatch(toggleTheme())}
     />
   );
 };

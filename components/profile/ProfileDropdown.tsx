@@ -1,4 +1,3 @@
-// ? External Components
 import React from "react";
 import {
   Dropdown,
@@ -14,24 +13,28 @@ import {
   Button,
 } from "@nextui-org/react";
 import AddCircleLineIcon from "remixicon-react/AddCircleLineIcon";
-// ? Local Components
+
 import Link from "next/link";
-import { useSetRecoilState } from "recoil";
-import { notificationState } from "@src/store/atoms/notification";
+
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
+// ? Redux
+import { useDispatch } from "react-redux";
+import { showAlert } from "@src/store/alert/alertSlice";
+
 export default function ProfileDropdown() {
+  // ? Redux States
+  const dispatch = useDispatch();
+  const route = useRouter();
+  const userEmail = useSession().data?.user?.email;
+
   const [userData, setUserData] = React.useState({
     profileImgUrl: "",
     profileUsername: "",
     profileName: "",
   });
-  const userEmail = useSession().data?.user?.email;
-
-  const route = useRouter();
-  const setNotification = useSetRecoilState(notificationState);
 
   React.useEffect(() => {
     const fetchUserData = async () => {
@@ -66,17 +69,21 @@ export default function ProfileDropdown() {
     const singout = await signOut({ redirect: true });
 
     if (singout) {
-      setNotification({
-        show: true,
-        type: "danger",
-        msg: "Logout failed! Try After Some Time.",
-      });
+      dispatch(
+        showAlert({
+          show: true,
+          type: "danger",
+          msg: "Logout failed! Try After Some Time.",
+        })
+      );
     } else {
-      setNotification({
-        show: true,
-        type: "success",
-        msg: "Logout Successfuly! Come Back Soon.",
-      });
+      dispatch(
+        showAlert({
+          show: true,
+          type: "success",
+          msg: "Logout Successfuly! Come Back Soon.",
+        })
+      );
       route.push("/login");
     }
   };

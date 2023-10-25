@@ -1,7 +1,6 @@
 "use client";
 
 import React, { FormEvent } from "react";
-// ? Comonents
 import {
   Card,
   CardHeader,
@@ -24,17 +23,18 @@ import Countries from "@src/utils/Constants/country_list";
 
 import { useSession } from "next-auth/react";
 
-// ? Recoil
-import { useSetRecoilState } from "recoil";
-import { notificationState } from "@src/store/atoms/notification";
+// ? Redux
+import type { RootState } from "@src/store/redux";
+import { useSelector, useDispatch } from "react-redux";
+import { showAlert } from "@src/store/alert/alertSlice";
 
 import { useRouter } from "next/navigation";
 
 export default function OnboardingPage() {
-  // ? Session
+  // ? User Session
   const userSession = useSession();
-  // ? Alert
-  const setNotification = useSetRecoilState(notificationState);
+  // ? Redux States
+  const dispatch = useDispatch();
 
   const router = useRouter();
 
@@ -103,11 +103,13 @@ export default function OnboardingPage() {
     setSubmitBtnLoading(true);
 
     try {
-      setNotification({
-        show: true,
-        type: "success",
-        msg: "Trying to create your account...",
-      });
+      dispatch(
+        showAlert({
+          show: true,
+          type: "success",
+          msg: "Trying to create your account...",
+        })
+      );
 
       const response = await fetch("/api/users/", {
         method: "POST",
@@ -118,45 +120,45 @@ export default function OnboardingPage() {
       });
 
       if (response.status === 201) {
+        dispatch(
+          showAlert({
+            show: true,
+            type: "success",
+            msg: "Successfully Created Your Account",
+          })
+        );
 
-        setNotification({
-          show: true,
-          type: "success",
-          msg: 'Successfully Created Your Account , "Kidly Reload The Page Now" ',
-        });
-          router.push('/feed', undefined, { shallow: false });
-
+        router.push("/feed");
+        router.refresh();
       } else if (response.status === 400) {
-
         setUsernameErrorMsg("This Username is not available");
-
       } else if (response.status === 401) {
-
-        setNotification({
-          show: true,
-          type: "warning",
-          msg: "You are Not Authorized to do this action",
-        });
-
+        dispatch(
+          showAlert({
+            show: true,
+            type: "warning",
+            msg: "You are Not Authorized to do this action",
+          })
+        );
       } else {
-
-        setNotification({
+        dispatch(
+          showAlert({
+            show: true,
+            type: "danger",
+            msg: "Error! Check Your Inputs Again..",
+          })
+        );
+      }
+    } catch (error) {
+      dispatch(
+        showAlert({
           show: true,
           type: "danger",
-          msg: "Error! Check Your Inputs Again..",
-        });
-      }
-
-    } catch (error) {
-
-      setNotification({
-        show: true,
-        type: "danger",
-        msg: `Error : ${error}`,
-      });
+          msg: `Error : ${error}`,
+        })
+      );
     }
     setSubmitBtnLoading(false);
-    
   };
 
   return (
@@ -369,12 +371,3 @@ export default function OnboardingPage() {
     </form>
   );
 }
-
-/**
- * name
- * username
- * bio
- * avatar
- * coverPic
- * gender
- */

@@ -1,8 +1,6 @@
 "use client";
 
 import { Button, Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
-import React, { Dispatch, SetStateAction } from "react";
-import { useRecoilState } from "recoil";
 
 import CheckboxCircleFillIcon from "remixicon-react/CheckboxCircleFillIcon";
 import CloseCircleLineIcon from "remixicon-react/CloseCircleLineIcon";
@@ -10,26 +8,27 @@ import ErrorWarningFillIcon from "remixicon-react/ErrorWarningFillIcon";
 import ErrorWarningLineIcon from "remixicon-react/ErrorWarningLineIcon";
 import InformationLineIcon from "remixicon-react/InformationLineIcon";
 
-import { notificationState } from "@src/store/atoms/notification";
+// ? Redux
+import type { RootState } from "@src/store/redux";
+import { useSelector, useDispatch } from "react-redux";
+import { showAlert } from "@src/store/alert/alertSlice";
 
 export default function Notification() {
-  const [notification , setNotification] = useRecoilState(notificationState);
+  const notification = useSelector((state: RootState) => state.alert);
+  const dispatch = useDispatch();
 
-  if(notification.show === false){
+  if (notification.show === false) {
     return null;
   }
 
-  const handleClose = () => {
-    setNotification({
-      show: false,
-      type: null,
-      msg: null,
-    });
-  }
+  const hideAlert = () => {
+    dispatch(showAlert({ show: false, type: null, msg: null }));
+  };
 
   return (
     <div
-    className={`fixed bottom-2 left-0 max-md:bottom-16 z-20 w-screen px-2 grid max-md:place-items-center transition-all`}>
+      className={`fixed bottom-2 left-0 max-md:bottom-16 z-20 w-screen px-2 grid max-md:place-items-center transition-all`}
+    >
       <Card radius="lg" shadow="lg" className={`bg-all max-w-md`}>
         <CardHeader className="justify-between">
           <Button
@@ -65,7 +64,7 @@ export default function Notification() {
             variant="light"
             aria-label="Close"
             size="md"
-            onClick={handleClose}
+            onClick={hideAlert}
           >
             <CloseCircleLineIcon />
           </Button>

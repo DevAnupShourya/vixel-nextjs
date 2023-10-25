@@ -11,36 +11,35 @@ import { Spinner } from "@nextui-org/react";
 import { type ProvidersProps } from "@src/types/index";
 
 import Notification from "@src/components/alerts/Notification";
-// ? Recoil
-import { useRecoilState } from "recoil";
-import { themeState } from "@src/store/atoms/theme";
-import { notificationState } from "@src/store/atoms/notification";
+
+// ? Redux
+import type { RootState } from "@src/store/redux";
+import { useSelector, useDispatch } from "react-redux";
+import { showAlert } from "@src/store/alert/alertSlice";
 
 // ? Next Auth
 import { useSession } from "next-auth/react";
 
 export default function App({ child }: ProvidersProps) {
-  const [theme, setTheme] = useRecoilState(themeState);
+  // ? User Auth Session
   const userSession = useSession();
-
-  const [notification, setNotification] = useRecoilState(notificationState);
+  // ? Redux States
+  const notification = useSelector((state: RootState) => state.alert);
+  const dispatch = useDispatch();
+  const theme = useSelector((state: RootState) => state.theme.mode);
 
   React.useEffect(() => {
     // ? Hide The Notification Toast
     if (notification.show) {
-      const hideAlert = setTimeout(() => {
-        setNotification({
-          show: false,
-          type: null,
-          msg: null,
-        });
+      const hideAlertAfterFiveSeconds = setTimeout(() => {
+        dispatch(showAlert({ show: false, type: null, msg: null }));
       }, 5000);
 
       return () => {
-        clearTimeout(hideAlert);
+        clearTimeout(hideAlertAfterFiveSeconds);
       };
     }
-  }, [notification, setNotification]);
+  }, [dispatch, notification.show]);
 
   return (
     <html lang="en">
