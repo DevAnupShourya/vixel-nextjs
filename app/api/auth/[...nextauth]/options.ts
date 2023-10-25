@@ -3,7 +3,7 @@ import GitHubProvider from "next-auth/providers/github";
 import GoogleProvidor from "next-auth/providers/google";
 
 import ConnectToDB from "@src/services/Database";
-import User from "@src/models/user";
+import User from "@src/models/user.model";
 
 export const authOptions: AuthOptions = {
     secret: process.env.NEXTAUTH_SECRET as string,
