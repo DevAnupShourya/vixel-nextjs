@@ -10,3 +10,12 @@ export interface alertInterface {
     type: "success" | "danger" | "warning" | null,
     msg: string | null,
 };
+
+export interface userDataInterface {
+    name: string,
+    username: string,
+    joining: string,
+    coverImgSrc: string,
+    avatarImgSrc: string,
+};
+

@@ -24,7 +24,8 @@ import Countries from "@src/utils/Constants/country_list";
 import { useSession } from "next-auth/react";
 
 // ? Redux
-import { useDispatch } from "react-redux";
+import type { RootState } from "@src/store/redux";
+import { useSelector, useDispatch } from "react-redux";
 import { showAlert } from "@src/store/alert/alertSlice";
 
 import { useRouter } from "next/navigation";
@@ -32,7 +33,8 @@ import { useRouter } from "next/navigation";
 export default function OnboardingPage() {
   // ? User Session
   const userSession = useSession();
-  // ? Redux States
+
+  // ? Redux
   const dispatch = useDispatch();
 
   const router = useRouter();
@@ -101,12 +103,20 @@ export default function OnboardingPage() {
     e.preventDefault();
     setSubmitBtnLoading(true);
 
+    const validRegex = /^[\w]+$/;
+    if (!validRegex.test(formData.username)) {
+      setUsernameErrorMsg(
+        "Your username must not contain spaces or special characters."
+      );
+      return;
+    }
+
     try {
       dispatch(
         showAlert({
           show: true,
           type: "success",
-          msg: "Trying to create your account...",
+          msg: "Plese Wait ! Trying to create your account...",
         })
       );
 
@@ -126,7 +136,6 @@ export default function OnboardingPage() {
             msg: "Successfully Created Your Account",
           })
         );
-
         router.push("/feed");
         router.refresh();
       } else if (response.status === 400) {
@@ -148,7 +157,7 @@ export default function OnboardingPage() {
           })
         );
       }
-    } catch (error : any) {
+    } catch (error: any) {
       dispatch(
         showAlert({
           show: true,

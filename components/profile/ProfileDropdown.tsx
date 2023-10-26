@@ -141,7 +141,8 @@ export default function ProfileDropdown() {
             />
           </DropdownItem>
           <DropdownItem key="dashboard">
-            <LinkButton as={Link} href="/dashboard" color="foreground">
+            {/* <LinkButton as={Link} href={`/${userData.profileUsername}`} color="foreground"> */}
+            <LinkButton as={Link} href={`/user_1`} color="foreground">
               Dashboard
             </LinkButton>
           </DropdownItem>

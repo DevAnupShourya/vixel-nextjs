@@ -67,27 +67,3 @@ export default function App({ child }: ProvidersProps) {
     </html>
   );
 }
-
-/**
- * ? Not Login
- * /about
- * /blogs
- * /contact
- * /signin
- * /singup
- *
- * ? After Login
- * /chats
- * /feed
- * /follow
- * /new
- * /notifications
- * /settings
- * /trending
- * --------------
- * /about
- * /blogs
- * /contact
- * /signin
- * /singup
- */

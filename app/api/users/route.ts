@@ -59,15 +59,28 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
     try {
         const request = req.headers;
-        
+
+        let searchField = '';
+        let searchQuery = '';
+        if (request.get('email')) {
+            searchField = 'email';
+            searchQuery = request.get('email') as string;
+            console.log('searchField', searchField, 'searchQuery', searchQuery)
+        }
+        if (request.get('username')) {
+            searchField = 'username';
+            searchQuery = request.get('username') as string;
+            console.log('searchField', searchField, 'searchQuery', searchQuery)
+        }
+
         // ? Connect To DB
         await ConnectToDB();
 
         // ? Checking if User is authorised or not
-        const userData = await User.findOne({ email: request.get('email') }, '-_id name username avatarUrl isOnboardingComplete');
+        const userData = await User.findOne({ [searchField]: [searchQuery] }, '-_id -_v');
 
         if (userData === null) {
-            return new Response('User Not Found', { status: 401 });
+            return new Response('User Not Found', { status: 400 });
         } else {
             return new Response(JSON.stringify(userData), { status: 200 });
         }
