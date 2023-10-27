@@ -12,6 +12,12 @@ import {
   ScrollShadow,
   Divider,
   Spinner,
+  useDisclosure,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  Image,
 } from "@nextui-org/react";
 
 import { AiFillEdit } from "react-icons/ai";
@@ -20,6 +26,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 import NotFound from "@src/components/error/NotFound";
+import ProfileEditPage from "@src/layouts/Profile/EditProfile";
 
 export default function Layout({
   children,
@@ -30,6 +37,9 @@ export default function Layout({
 }) {
   const router = useRouter();
   const pathname = usePathname();
+
+  // ? Edit PRofile Modal
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [userSearchStatus, setuserSearchStatus] = React.useState<
     null | true | false
@@ -44,6 +54,8 @@ export default function Layout({
     folowers: "",
     following: "",
     bio: "",
+    gender: "",
+    country: "",
     joining: new Date(),
     coverImgSrc: "",
     avatarImgSrc: "",
@@ -66,8 +78,6 @@ export default function Layout({
         if (response.ok) {
           setuserSearchStatus(true);
           const userData = await response.json();
-          console.log(userData);
-
           setData({
             name: userData.name,
             username: userData.username,
@@ -75,6 +85,8 @@ export default function Layout({
             folowers: userData.followers,
             following: userData.following,
             bio: userData.bio,
+            gender: userData.gender,
+            country: userData.country,
             joining: userData.createdAt,
             coverImgSrc: userData.coverUrl,
             avatarImgSrc: userData.avatarUrl,
@@ -94,12 +106,19 @@ export default function Layout({
   }, [data.username, userMail]);
 
   return userSearchStatus === null ? (
-    <Spinner label="Searching User......." color="danger" labelColor="danger" className="w-full h-full grid place-items-center" />
+    <Spinner
+      label="Searching User......."
+      color="danger"
+      labelColor="danger"
+      className="w-full h-full grid place-items-center"
+    />
   ) : userSearchStatus === false ? (
-    <NotFound type="User" />
+    <>
+      <NotFound type="User" />
+    </>
   ) : (
     <>
-      <Card className="bg-main-text-main ">
+      <Card className="bg-main-text-main">
         {/* Background and profile */}
         <CardHeader
           className="relative flex h-56 max-md:h-36 w-full justify-center bg-cover"
@@ -123,6 +142,7 @@ export default function Layout({
                 variant="flat"
                 aria-label="Edit Profile"
                 className="absolute -bottom-14 right-5"
+                onPress={onOpen}
               >
                 <AiFillEdit className="w-2/3 h-auto" />
               </Button>
@@ -132,21 +152,38 @@ export default function Layout({
 
         {/* Name and position */}
         <CardBody className="mt-12 flex flex-col items-center">
-          <h4 className="text-xl font-bold text-light-main dark:text-dark-main">
+          <h4 className="text-xl font-bold text-light-main dark:text-dark-main capitalize flex flex-row items-center gap-2">
             {data.name}
+            <Tooltip
+              content={`I Love My Country ${data.country}`}
+              className="bg-def"
+            >
+              <Image
+                width={20}
+                height={40}
+                alt={data.country}
+                src={`https://flagsapi.com/IN/flat/64.png`}
+              />
+            </Tooltip>
           </h4>
-          <h5 className="text-base font-normal text-primary">
+          <h5 className="text-base font-normal text-primary lowercase">
             @{data.username}
           </h5>
         </CardBody>
 
         {/* Bio and Dat */}
         <CardBody className="text-center w-10/12 mx-auto">
-          <p className="text-lg font-normal text-light-default dark:text-dark-default">
+          <p className="text-lg font-normal capitalize text-light-default dark:text-dark-default">
             {data.bio}
           </p>
-          <p className="text-lg font-bold text-light-default dark:text-dark-default">
+          <p className="text-lg font-bold capitalize text-light-default dark:text-dark-default">
             Joined on {new Date(data.joining).toDateString()}
+          </p>
+          <p className="text-lg font-bold capitalize text-light-default dark:text-dark-default">
+            From {data.country}
+          </p>
+          <p className="text-lg font-bold capitalize text-light-default dark:text-dark-default">
+            Gender {data.gender}
           </p>
         </CardBody>
 
@@ -174,7 +211,7 @@ export default function Layout({
             <h4 className="text-2xl font-bold text-light-main  dark:text-dark-main">
               {data.following}
             </h4>
-            <p className="text-sm font-normal text-light-default  dark:text-dark-default">
+            <p className="text-sm font-normal text-light-default dark:text-dark-default">
               Following
             </p>
           </div>
@@ -269,11 +306,56 @@ export default function Layout({
               >
                 Media
               </Button>
+              <Button
+                size="md"
+                href="/"
+                variant="light"
+                fullWidth
+                radius="none"
+                className={`${
+                  pathname === `/${data.username}/media`
+                    ? "border-b-2 border-primary font-bold text-light-main dark:text-dark-main"
+                    : "text-light-default dark:text-dark-default"
+                } `}
+                onClick={() => {
+                  router.push(`/${data.username}/settings`, { scroll: false });
+                }}
+              >
+                Settings
+              </Button>
             </div>
           </ScrollShadow>
         </CardBody>
       </Card>
       <section className="mb-5 py-5">{children}</section>
+      <Modal
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="center"
+        backdrop="blur"
+        className="bg-main-text-main"
+        scrollBehavior="inside"
+        isDismissable={false}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                Edit Profile
+                <p className="text-sm mt-1 leading-6 ">
+                  This information will be displayed publicly so be careful what
+                  you share.
+                </p>
+              </ModalHeader>
+              <ModalBody>
+                <ScrollShadow hideScrollBar>
+                  <ProfileEditPage onClose={onClose} data={data} />
+                </ScrollShadow>
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </>
   );
 }

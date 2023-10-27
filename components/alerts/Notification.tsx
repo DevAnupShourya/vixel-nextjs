@@ -27,7 +27,7 @@ export default function Notification() {
 
   return (
     <div
-      className={`fixed bottom-2 left-0 max-md:bottom-16 z-20 w-screen px-2 grid max-md:place-items-center transition-all`}
+      className={`fixed bottom-2 left-0 max-md:bottom-16 z-50 w-screen px-2 grid max-md:place-items-center transition-all`}
     >
       <Card radius="lg" shadow="lg" className={`bg-all max-w-md`}>
         <CardHeader className="justify-between">

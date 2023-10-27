@@ -29,7 +29,7 @@ import { showAlert } from "@src/store/alert/alertSlice";
 
 import { useRouter } from "next/navigation";
 
-export default function OnboardingPage() {
+export default function ProfileEditPage({ onClose, data }) {
   // ? User Session
   const userSession = useSession();
 
@@ -83,23 +83,23 @@ export default function OnboardingPage() {
   }
 
   const [formData, setFormData] = React.useState({
-    username: "",
-    bio: "",
-    avatarSrc: "",
-    coverSrc: "",
-    name: "",
-    country: "",
-    gender: "",
+    username: data.username,
+    bio: data.bio,
+    avatarSrc: data.avatarImgSrc,
+    coverSrc: data.coverImgSrc,
+    name: data.name,
+    country: data.country,
+    gender: data.gender,
     email: userSession.data?.user?.email,
   });
-
+  
   const [submitBtnLoading, setSubmitBtnLoading] = React.useState(false);
   const [usernameErrorMsg, setUsernameErrorMsg] = React.useState<null | string>(
     null
   );
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
     setUsernameErrorMsg(null);
-    e.preventDefault();
     setSubmitBtnLoading(true);
 
     const validRegex = /^[\w]+$/;
@@ -115,7 +115,7 @@ export default function OnboardingPage() {
         showAlert({
           show: true,
           type: "success",
-          msg: "Plese Wait ! Trying to create your account...",
+          msg: "Plese Wait ! Updating your account...",
         })
       );
 
@@ -132,11 +132,11 @@ export default function OnboardingPage() {
           showAlert({
             show: true,
             type: "success",
-            msg: "Successfully Created Your Account",
+            msg: "Successfully Updated Your Account",
           })
         );
-        router.push("/feed");
-        router.refresh();
+        onClose();
+        router.push(`/${formData.username}`);
       } else if (response.status === 400) {
         setUsernameErrorMsg("This Username is not available");
       } else if (response.status === 401) {
@@ -170,15 +170,7 @@ export default function OnboardingPage() {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <Card className="max-w-lg bg-main-text-default mx-auto">
-        <CardHeader className="block">
-          <p className="title-3 leading-7">Profile</p>
-          <p className="text-sm mt-1 leading-6 ">
-            This information will be displayed publicly so be careful what you
-            share.
-          </p>
-        </CardHeader>
-        <Divider />
+      <Card className="max-w-lg bg-main-text-default">
         <CardBody className="gap-4">
           {/* USERNAME */}
           <Input
@@ -325,6 +317,7 @@ export default function OnboardingPage() {
               setFormData({ ...formData, gender: e.target.value });
             }}
             value={formData.gender}
+            defaultSelectedKeys={[`${formData.gender}`]}
           >
             <SelectItem className="bg-def" key="male" value="male">
               Male
@@ -351,12 +344,14 @@ export default function OnboardingPage() {
               setFormData({ ...formData, country: e.target.value });
             }}
             value={formData.country}
+            defaultSelectedKeys={[`${formData.country}`]}
           >
             {Countries.map((country) => (
               <SelectItem
                 className="bg-main-text-default"
                 key={country}
                 value={country}
+                defaultChecked={formData.country}
               >
                 {country}
               </SelectItem>

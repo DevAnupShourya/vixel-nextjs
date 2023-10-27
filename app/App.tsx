@@ -26,7 +26,8 @@ export default function App({ child }: ProvidersProps) {
   // ? Redux States
   const notification = useSelector((state: RootState) => state.alert);
   const dispatch = useDispatch();
-  const theme = useSelector((state: RootState) => state.theme.mode);
+  const themeFromState = useSelector((state: RootState) => state.theme.mode);
+  const themeToUseRef = React.useRef<string>("");
 
   React.useEffect(() => {
     // ? Hide The Notification Toast
@@ -39,14 +40,22 @@ export default function App({ child }: ProvidersProps) {
         clearTimeout(hideAlertAfterFiveSeconds);
       };
     }
-  }, [dispatch, notification.show]);
+    // ? Them Switcher
+    const themeFromLocalStorage = localStorage.getItem("vixel-theme");
+    if (!themeFromLocalStorage) {
+      themeToUseRef.current = themeFromState;
+    } else {
+      themeToUseRef.current = themeFromLocalStorage;
+    }
+    
+  }, [dispatch, notification.show, themeFromState]);
 
   return (
     <html lang="en">
       <head>
         <title>Vixel</title>
       </head>
-      <body className={theme}>
+      <body className={themeToUseRef.current}>
         {/* // ? Next UI Providor */}
         <NextUIProvider>
           <Notification />

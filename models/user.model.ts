@@ -20,6 +20,9 @@ const userSchema = new Schema({
     max: [50, 'Username Should be less than 50 chars!!'],
     min: [5, 'Username Should be at least 10 chars!!'],
   },
+  country: {
+    type: String,
+  },
   gender: {
     type: String,
   },
