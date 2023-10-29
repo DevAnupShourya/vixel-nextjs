@@ -14,8 +14,7 @@ import Notification from "@src/components/alerts/Notification";
 
 // ? Redux
 import type { RootState } from "@src/store/redux";
-import { useSelector, useDispatch } from "react-redux";
-import { showAlert } from "@src/store/alert/alertSlice";
+import { useSelector } from "react-redux";
 
 // ? Next Auth
 import { useSession } from "next-auth/react";
@@ -24,38 +23,22 @@ export default function App({ child }: ProvidersProps) {
   // ? User Auth Session
   const userSession = useSession();
   // ? Redux States
-  const notification = useSelector((state: RootState) => state.alert);
-  const dispatch = useDispatch();
   const themeFromState = useSelector((state: RootState) => state.theme.mode);
-  const themeToUseRef = React.useRef<string>("");
+  const [themeToUse, setThemeToUse] = React.useState<undefined | string>(
+    undefined
+  );
 
   React.useEffect(() => {
-    // ? Hide The Notification Toast
-    if (notification.show) {
-      const hideAlertAfterFiveSeconds = setTimeout(() => {
-        dispatch(showAlert({ show: false, type: null, msg: null }));
-      }, 5000);
-
-      return () => {
-        clearTimeout(hideAlertAfterFiveSeconds);
-      };
-    }
-    // ? Them Switcher
-    const themeFromLocalStorage = localStorage.getItem("vixel-theme");
-    if (!themeFromLocalStorage) {
-      themeToUseRef.current = themeFromState;
-    } else {
-      themeToUseRef.current = themeFromLocalStorage;
-    }
-    
-  }, [dispatch, notification.show, themeFromState]);
+    // ? Getting Theme Value after Page Loaded to Get localstorage API
+    setThemeToUse(localStorage.getItem("vixel-theme") || themeFromState);
+  }, [themeFromState]);
 
   return (
     <html lang="en">
       <head>
         <title>Vixel</title>
       </head>
-      <body className={themeToUseRef.current}>
+      <body className={themeToUse}>
         {/* // ? Next UI Providor */}
         <NextUIProvider>
           <Notification />

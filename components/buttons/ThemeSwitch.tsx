@@ -7,40 +7,32 @@ import type { RootState } from "@src/store/redux";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "@src/store/theme/themeSlice";
 
-const ThemeSwitch = () => {
+export default function ThemeSwitcher() {
   const dispatch = useDispatch();
   const themeFromState = useSelector((state: RootState) => state.theme.mode);
-  const themeToUseRef = React.useRef<string>("");
 
-  React.useEffect(() => {
-    const themeFromLocalStorage = localStorage.getItem("vixel-theme");
-    if (!themeFromLocalStorage) {
-      themeToUseRef.current = themeFromState;
-    } else {
-      themeToUseRef.current = themeFromLocalStorage;
-    }
-  }, [themeFromState]);
+  const [themeToUse, setThemeToUse] = React.useState(
+    localStorage.getItem("vixel-theme") || themeFromState
+  );
+
+  const handleThemeChange = () => {
+    dispatch(toggleTheme());
+    localStorage.setItem(
+      "vixel-theme",
+      themeToUse === "dark" ? "light" : "dark"
+    );
+    setThemeToUse(themeToUse === "dark" ? "light" : "dark");
+  };
 
   return (
     <Switch
-      defaultSelected={themeToUseRef.current === "dark" ? true : false}
+      defaultSelected={themeToUse === "dark"}
       size="lg"
       color="primary"
       className="text-light-main dark:text-dark-main"
       startContent={<BsFillMoonStarsFill />}
       endContent={<BsFillSunFill />}
-      onClick={() => {
-        dispatch(toggleTheme());
-        localStorage.setItem(
-          "vixel-theme",
-          themeToUseRef.current === "dark" ? "light" : "dark"
-        );
-      }}
-      //
+      onClick={handleThemeChange}
     />
   );
-};
-
-export default function ThemeSwitcher() {
-  return <ThemeSwitch />;
 }
