@@ -5,6 +5,7 @@
 [![GitHub Stars](https://img.shields.io/github/stars/DevAnupShourya/Vixel)](https://github.com/DevAnupShourya/Vixel/stargazers)
 
 ## Introduction
+Project In Progress.
 
 Welcome to Vixel: World in Pixels, the ultimate social media platform designed to connect individuals through a vibrant and visually captivating experience. With an intuitive interface and cutting-edge features, Vixel empowers users to express their creativity, share their life moments, and engage with a global community. Whether you're an aspiring photographer, artist, or simply looking to connect with like-minded individuals, Vixel offers a unique platform to showcase your talents and foster meaningful connections. Join us today and embark on a journey where the world unfolds pixel by pixel.
 
