@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "@src/layouts/navbar/NavPublic";
 import Footer from "@src/layouts/footer/Footer";
 

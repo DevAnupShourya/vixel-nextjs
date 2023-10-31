@@ -3,7 +3,9 @@ import Chat1LineIcon from "remixicon-react/Chat1LineIcon";
 import ShareBoxFillIcon from "remixicon-react/ShareLineIcon";
 import Menu5LineIcon from "remixicon-react/Menu5LineIcon";
 import BarChart2LineIcon from "remixicon-react/BarChart2LineIcon";
+
 import Link from "next/link";
+
 import { motion } from "framer-motion";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import { User } from "@nextui-org/user";

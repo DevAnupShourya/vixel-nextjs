@@ -1,5 +1,3 @@
-"use client";
-
 import React, { FormEvent } from "react";
 import { HiPhoto } from "react-icons/hi2";
 import { CgProfile } from "react-icons/cg";

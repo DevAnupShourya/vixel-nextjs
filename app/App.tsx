@@ -5,11 +5,9 @@ import React from "react";
 import { NextUIProvider } from "@nextui-org/react";
 
 // ? Local Components
+import { Spinner } from "@nextui-org/spinner";
 import Dashboard from "@src/screens/Private/Dashboard/Dashboard";
 import Landing from "@src/screens/Public/Landing/Landing";
-import { Spinner } from "@nextui-org/spinner";
-import { type ProvidersProps } from "@src/types/index";
-
 import Notification from "@src/components/alerts/Notification";
 
 // ? Redux

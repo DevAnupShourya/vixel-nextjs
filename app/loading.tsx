@@ -1,9 +1,15 @@
-"use client";
-
-import {Skeleton} from "@nextui-org/skeleton";
+import { Progress } from "@nextui-org/progress";
 
 export default function Loading() {
   return (
-    <Skeleton className="w-full h-full"></Skeleton>
+    <div className="w-full h-5/6 grid place-items-center">
+      <Progress
+        size="sm"
+        isIndeterminate
+        label="Page Loading... Plese Wait!!"
+        aria-label="Page Loading... Plese Wait!!"
+        className="max-w-md min-w-min"
+      />
+    </div>
   );
 }

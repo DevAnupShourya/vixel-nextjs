@@ -1,6 +1,4 @@
 "use client";
-
-import { useEffect } from "react";
 import { Button } from "@nextui-org/button";
 
 export default function Error({
@@ -10,10 +8,7 @@ export default function Error({
   error: Error;
   reset: () => void;
 }) {
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+  console.error(error);
 
   return (
     <section className="w-full h-full bg-light-default dark:bg-dark-default grid place-items-center">
@@ -32,7 +27,7 @@ export default function Error({
             type="button"
             color="warning"
             onClick={
-              // Attempt to recover by trying to re-render the segment
+              // ? Attempt to recover by trying to re-render the segment
               () => reset()
             }
           >

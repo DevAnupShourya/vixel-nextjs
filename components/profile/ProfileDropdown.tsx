@@ -1,5 +1,11 @@
 import React from "react";
-import AddCircleLineIcon from "remixicon-react/AddCircleLineIcon";
+
+import { AiOutlineVideoCameraAdd } from "react-icons/ai";
+import { RiUserSettingsLine } from "react-icons/ri";
+import { HiOutlineLogout } from "react-icons/hi";
+import { GiHelp } from "react-icons/gi";
+import { MdOutlineWidgets } from "react-icons/md";
+
 import {
   Dropdown,
   DropdownItem,
@@ -11,7 +17,6 @@ import { Avatar } from "@nextui-org/avatar";
 import { User } from "@nextui-org/user";
 import { Select, SelectItem } from "@nextui-org/select";
 import { Button } from "@nextui-org/button";
-import { Link as LinkButton } from "@nextui-org/link";
 
 import Link from "next/link";
 
@@ -88,11 +93,12 @@ export default function ProfileDropdown() {
   };
   return (
     <Dropdown
+      size="lg"
       radius="sm"
-      className=""
       classNames={{
-        base: "p-0 border-small border-divider bg-light-main dark:bg-dark-main",
+        base: "p-0",
       }}
+      backdrop="blur"
     >
       <DropdownTrigger className="cursor-pointer">
         <Avatar
@@ -103,20 +109,16 @@ export default function ProfileDropdown() {
         />
       </DropdownTrigger>
       <DropdownMenu
-        aria-label="Custom item styles"
+        aria-label="Profile Dropdown List"
         disabledKeys={["profile"]}
         className="p-3"
         itemClasses={{
           base: [
             "rounded-md",
-            "text-default-500",
+            "text-default-400",
             "transition-opacity",
-            "data-[hover=true]:text-foreground",
-            "data-[hover=true]:bg-default-100",
-            "dark:data-[hover=true]:bg-default-50",
-            "data-[selectable=true]:focus:bg-default-50",
-            "data-[pressed=true]:opacity-70",
-            "data-[focus-visible=true]:ring-default-500",
+            "data-[hover=true]:text-default-800",
+            "data-[hover=true]:bg-default",
           ],
         }}
       >
@@ -139,68 +141,92 @@ export default function ProfileDropdown() {
               }}
             />
           </DropdownItem>
-          <DropdownItem key="dashboard">
-            <LinkButton
-              as={Link}
-              href={`/${userData.profileUsername}`}
+          <DropdownItem
+            key="dashboard"
+            endContent={<MdOutlineWidgets className="text-lg" />}
+          >
+            <Link href={`/${userData.profileUsername}`} color="foreground">
+              Dashboard
+            </Link>
+          </DropdownItem>
+          <DropdownItem
+            key="settings"
+            endContent={<RiUserSettingsLine className="text-lg" />}
+          >
+            <Link
+              href={`/${userData.profileUsername}/settings`}
               color="foreground"
             >
-              Dashboard
-            </LinkButton>
-          </DropdownItem>
-          <DropdownItem key="settings">
-            <LinkButton as={Link} href="/settings" color="foreground">
-              Settings
-            </LinkButton>
+              User Settings
+            </Link>
           </DropdownItem>
           <DropdownItem
             key="new_post"
-            endContent={<AddCircleLineIcon className="text-large" />}
+            endContent={<AiOutlineVideoCameraAdd className="text-lg" />}
           >
-            <LinkButton as={Link} href="/new" color="foreground">
-              New Project
-            </LinkButton>
+            <Link href="/new" color="foreground">
+              New Post
+            </Link>
           </DropdownItem>
         </DropdownSection>
 
         <DropdownSection aria-label="Preferences" showDivider>
-          <DropdownItem key="quick_search" shortcut="⌘K">
-            <LinkButton as={Link} href="/search" color="foreground">
-              Quick search
-            </LinkButton>
+          <DropdownItem
+            key="quick_search"
+            shortcut="ctrl + K"
+            onClick={() => {
+              // TODO : Search Modal
+              console.log("Opening Search Modal...");
+            }}
+          >
+            Quick search
           </DropdownItem>
           <DropdownItem
             isReadOnly
             key="language"
             className="cursor-default"
-            endContent={
+            startContent={
               <Select
                 label="Language"
-                placeholder="Select Language"
-                defaultSelectedKeys={["en"]}
-                className="z-10 w-1/2 py-1 rounded-md text-tiny text-light-main dark:text-dark-main"
+                labelPlacement="inside"
+                defaultSelectedKeys={["english"]}
+                className="w-full"
               >
-                <SelectItem key="en" value="en">
-                  {"EN"}
-                </SelectItem>
-                <SelectItem key="hin" value="hin">
-                  {"HIN"}
-                </SelectItem>
+                {[
+                  {
+                    label: "Hindi",
+                    value: "hindi",
+                  },
+                  {
+                    label: "English",
+                    value: "english",
+                  },
+                ].map((language) => (
+                  <SelectItem
+                    key={language.value}
+                    value={language.value}
+                    className="bg-main-text-default"
+                  >
+                    {language.label}
+                  </SelectItem>
+                ))}
               </Select>
             }
-          >
-            Language
-          </DropdownItem>
+          ></DropdownItem>
         </DropdownSection>
 
-        <DropdownSection aria-label="Help & Feedback">
-          <DropdownItem key="help_and_feedback">
-            <LinkButton as={Link} href="/contact" color="foreground">
+        <DropdownSection aria-label="Help & Feedback" showDivider>
+          <DropdownItem
+            key="help_and_feedback"
+            endContent={<GiHelp className="text-lg" />}
+          >
+            <Link href="/contact" color="foreground">
               Help & Feedback
-            </LinkButton>
+            </Link>
           </DropdownItem>
           <DropdownItem key="logout">
-            <Button onClick={handleLogout} color="danger">
+            <Button onClick={handleLogout} color="danger" fullWidth>
+              <HiOutlineLogout className="text-lg" />
               Log Out
             </Button>
           </DropdownItem>
