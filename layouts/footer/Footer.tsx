@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Link as LinkBtn } from "@nextui-org/react";
+import { Link as LinkBtn } from "@nextui-org/link";
 import { FooterItems } from "@src/utils/Constants/Links";
 
 export default function Footer() {

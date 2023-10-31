@@ -1,6 +1,6 @@
 import { ComponentType } from "react";
-import { Link as LinkButton } from "@nextui-org/react";
-import { Tooltip } from "@nextui-org/react";
+import { Link as LinkButton } from "@nextui-org/link";
+import { Tooltip } from "@nextui-org/tooltip";
 import Link from "next/link";
 
 interface nav_item {

@@ -1,11 +1,11 @@
 import React from "react";
-import { Switch } from "@nextui-org/react";
 import { BsFillSunFill, BsFillMoonStarsFill } from "react-icons/bs";
 
 // ? Redux
 import type { RootState } from "@src/store/redux";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "@src/store/theme/themeSlice";
+import { Switch } from "@nextui-org/switch";
 
 export default function ThemeSwitcher() {
   const dispatch = useDispatch();

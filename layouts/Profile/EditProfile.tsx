@@ -1,21 +1,6 @@
 "use client";
 
 import React, { FormEvent } from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Avatar,
-  Divider,
-  Input,
-  Textarea,
-  Button,
-  Image as ImageComponent,
-  Select,
-  SelectItem,
-} from "@nextui-org/react";
-
 import { HiPhoto } from "react-icons/hi2";
 import { CgProfile } from "react-icons/cg";
 
@@ -28,6 +13,13 @@ import { useDispatch } from "react-redux";
 import { showAlert } from "@src/store/alert/alertSlice";
 
 import { useRouter } from "next/navigation";
+import { Card, CardBody, CardFooter } from "@nextui-org/card";
+import { Input, Textarea } from "@nextui-org/input";
+import { Avatar } from "@nextui-org/avatar";
+import { Button } from "@nextui-org/button";
+import { Select, SelectItem } from "@nextui-org/select";
+import { Divider } from "@nextui-org/divider";
+import { Image as ImageComponent } from "@nextui-org/image";
 
 export default function ProfileEditPage({ onClose, data }) {
   // ? User Session
@@ -92,13 +84,13 @@ export default function ProfileEditPage({ onClose, data }) {
     gender: data.gender,
     email: userSession.data?.user?.email,
   });
-  
+
   const [submitBtnLoading, setSubmitBtnLoading] = React.useState(false);
   const [usernameErrorMsg, setUsernameErrorMsg] = React.useState<null | string>(
     null
   );
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+    e.preventDefault();
     setUsernameErrorMsg(null);
     setSubmitBtnLoading(true);
 

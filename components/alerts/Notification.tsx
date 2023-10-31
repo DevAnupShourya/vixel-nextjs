@@ -1,4 +1,6 @@
-import { Button, Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
+import { Card, CardHeader, CardBody } from "@nextui-org/card";
+import { Button } from "@nextui-org/button";
+import { Divider } from "@nextui-org/divider";
 
 import CheckboxCircleFillIcon from "remixicon-react/CheckboxCircleFillIcon";
 import CloseCircleLineIcon from "remixicon-react/CloseCircleLineIcon";

@@ -1,20 +1,13 @@
 "use client";
 
 import React, { FormEvent } from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Avatar,
-  Divider,
-  Input,
-  Textarea,
-  Button,
-  Image as ImageComponent,
-  Select,
-  SelectItem,
-} from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Divider } from "@nextui-org/divider";
+import { Select, SelectItem } from "@nextui-org/select";
+import { Input, Textarea } from "@nextui-org/input";
+import { Avatar } from "@nextui-org/avatar";
+import { Button } from "@nextui-org/button";
+import { Image as ImageComponent } from "@nextui-org/image";
 
 import { HiPhoto } from "react-icons/hi2";
 import { CgProfile } from "react-icons/cg";

@@ -1,11 +1,6 @@
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Divider,
-  Button,
-} from "@nextui-org/react";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
+import { Button } from "@nextui-org/button";
+import { Divider } from "@nextui-org/divider";
 
 import Link from "next/link";
 

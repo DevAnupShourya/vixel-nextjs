@@ -1,6 +1,4 @@
-"use client";
-
-import { Divider } from "@nextui-org/react";
+import { Divider } from "@nextui-org/divider";
 
 export default function PageTitle({title} : {title : string}) {
   return (

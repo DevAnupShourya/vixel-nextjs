@@ -17,8 +17,7 @@ export default function Providors({
     // ? Next Auth Providor
     <SessionProvider session={session}>
       {/* // ? Redux Providor */}
-      <Provider store={store}>{children}
-      </Provider>
+      <Provider store={store}>{children}</Provider>
     </SessionProvider>
   );
 }

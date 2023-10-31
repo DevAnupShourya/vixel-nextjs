@@ -1,15 +1,13 @@
-"use client";
-
 import React from "react";
 import { motion } from "framer-motion";
-import { ScrollShadow } from "@nextui-org/react";
+import { ScrollShadow } from "@nextui-org/scroll-shadow";
 
 import Nav from "@src/layouts/navbar/NavPrivate";
 import NavMobile from "@src/layouts/navbar/MobileNavPrivate";
 import Aside from "@src/layouts/sidebar/Aside";
 import Notification from "@src/components/alerts/Notification";
 
-export default function Dashboard({ child }: { child: React.ReactNode }) {
+export default function Dashboard({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Notification />
@@ -29,7 +27,7 @@ export default function Dashboard({ child }: { child: React.ReactNode }) {
             transition={{ duration: 1 }}
             className="max-md:hidden w-1/3 h-full overflow-y-scroll noBars"
           >
-            {/* <Aside /> */}
+            <Aside />
           </motion.aside>
           <motion.main
             initial={{ opacity: 0 }}
@@ -38,7 +36,7 @@ export default function Dashboard({ child }: { child: React.ReactNode }) {
             className="max-md:w-full w-2/3 h-full md:pl-10 max-md:px-2"
           >
             <ScrollShadow hideScrollBar className="w-full h-full">
-              {child}
+              {children}
             </ScrollShadow>
           </motion.main>
         </div>

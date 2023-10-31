@@ -1,18 +1,17 @@
 import React from "react";
+import AddCircleLineIcon from "remixicon-react/AddCircleLineIcon";
 import {
   Dropdown,
-  DropdownTrigger,
+  DropdownItem,
   DropdownMenu,
   DropdownSection,
-  DropdownItem,
-  Avatar,
-  User,
-  Link as LinkButton,
-  Select,
-  SelectItem,
-  Button,
-} from "@nextui-org/react";
-import AddCircleLineIcon from "remixicon-react/AddCircleLineIcon";
+  DropdownTrigger,
+} from "@nextui-org/dropdown";
+import { Avatar } from "@nextui-org/avatar";
+import { User } from "@nextui-org/user";
+import { Select, SelectItem } from "@nextui-org/select";
+import { Button } from "@nextui-org/button";
+import { Link as LinkButton } from "@nextui-org/link";
 
 import Link from "next/link";
 
@@ -141,7 +140,11 @@ export default function ProfileDropdown() {
             />
           </DropdownItem>
           <DropdownItem key="dashboard">
-            <LinkButton as={Link} href={`/${userData.profileUsername}`} color="foreground">
+            <LinkButton
+              as={Link}
+              href={`/${userData.profileUsername}`}
+              color="foreground"
+            >
               Dashboard
             </LinkButton>
           </DropdownItem>

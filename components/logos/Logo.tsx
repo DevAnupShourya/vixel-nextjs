@@ -1,7 +1,6 @@
+import { Tooltip } from "@nextui-org/tooltip";
 import "./style.scss";
 import Link from "next/link";
-import { Tooltip } from "@nextui-org/react";
-
 export default function Logo() {
   return (
     <Tooltip

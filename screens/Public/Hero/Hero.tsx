@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Link as LinkBtn, Button } from "@nextui-org/react";
+import { Link as LinkBtn } from "@nextui-org/link";
+import { Button } from "@nextui-org/button";
 
 export default function Hero() {
   return (

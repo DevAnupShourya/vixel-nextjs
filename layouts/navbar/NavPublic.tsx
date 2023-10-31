@@ -8,12 +8,13 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link as LinkBtn,
-  Button,
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-} from "@nextui-org/react";
+} from "@nextui-org/navbar";
+
+import { Button } from "@nextui-org/button";
+
 import Link from "next/link";
 
 // ? Local Components
@@ -68,12 +69,7 @@ export default function Navbar() {
           <div className="max-md:hidden">
             <ThemeSwitch />
           </div>
-          <Button
-            as={Link}
-            href="/login"
-            variant="shadow"
-            color="secondary"
-          >
+          <Button as={Link} href="/login" variant="shadow" color="secondary">
             Login
           </Button>
         </NavbarContent>

@@ -1,8 +1,7 @@
-import React from "react";
-
 // ? External Components
 import { usePathname } from "next/navigation";
-import { Button, Badge } from "@nextui-org/react";
+import { Button } from "@nextui-org/button";
+import { Badge } from "@nextui-org/badge";
 import Notification4LineIcon from "remixicon-react/Notification4LineIcon";
 import Link from "next/link";
 
@@ -52,7 +51,7 @@ export default function Navbar() {
             </Button>
           </Badge>
         </div>
-        <ProfileDropdown/>
+        <ProfileDropdown />
       </div>
     </nav>
   );

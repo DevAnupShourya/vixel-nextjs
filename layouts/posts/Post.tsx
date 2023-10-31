@@ -1,21 +1,3 @@
-"use client";
-
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Divider,
-  Link as LinkBtn,
-  Button,
-  ButtonGroup,
-  User,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from "@nextui-org/react";
-
 import Heart3LineIcon from "remixicon-react/Heart3LineIcon";
 import Chat1LineIcon from "remixicon-react/Chat1LineIcon";
 import ShareBoxFillIcon from "remixicon-react/ShareLineIcon";
@@ -23,6 +5,17 @@ import Menu5LineIcon from "remixicon-react/Menu5LineIcon";
 import BarChart2LineIcon from "remixicon-react/BarChart2LineIcon";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
+import { User } from "@nextui-org/user";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/dropdown";
+import { Button, ButtonGroup } from "@nextui-org/button";
+import { Divider } from "@nextui-org/divider";
+import { Link as LinkBtn } from "@nextui-org/link";
 
 export default function Post() {
   return (

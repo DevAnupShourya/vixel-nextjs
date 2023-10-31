@@ -26,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <Providors session={session}>
-      <App child={children} />
+      <App>{children}</App>
     </Providors>
   );
 }

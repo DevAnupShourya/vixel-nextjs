@@ -1,24 +1,21 @@
 "use client";
 
 import React from "react";
+import { Tooltip } from "@nextui-org/tooltip";
+import { Image } from "@nextui-org/image";
+import { ScrollShadow } from "@nextui-org/scroll-shadow";
+import { Spinner } from "@nextui-org/spinner";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Avatar } from "@nextui-org/avatar";
+import { Button } from "@nextui-org/button";
+import { Divider } from "@nextui-org/divider";
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Avatar,
-  Button,
-  Tooltip,
-  ScrollShadow,
-  Divider,
-  Spinner,
-  useDisclosure,
   Modal,
   ModalContent,
   ModalHeader,
   ModalBody,
-  Image,
-} from "@nextui-org/react";
+  useDisclosure,
+} from "@nextui-org/modal";
 
 import { AiFillEdit } from "react-icons/ai";
 import { useRouter, usePathname } from "next/navigation";

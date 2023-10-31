@@ -1,14 +1,10 @@
 "use client";
 
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Button,
-  Divider,
-  Link as LinkBtn,
-} from "@nextui-org/react";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
+import { Button } from "@nextui-org/button";
+import { Divider } from "@nextui-org/divider";
+import { Link as LinkBtn } from "@nextui-org/link";
+
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithubAlt } from "react-icons/fa";
