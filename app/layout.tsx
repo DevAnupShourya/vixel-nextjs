@@ -1,6 +1,5 @@
 // ? Global Provider
 import Providors from "./providors";
-import type { Session } from "next-auth/core/types";
 
 // ? Css
 import "@src/styles/globals.css";
@@ -17,16 +16,22 @@ export const metadata: Metadata = {
     "Welcome to Vixel, the social media platform for connecting and sharing with friends.",
 };
 
+import reduxStore from "@src/store/redux";
+import { Provider as ReduxProvider } from "react-redux";
+
 export default function RootLayout({
   children,
-  session,
 }: {
   children: React.ReactNode;
-  session: Session;
 }) {
   return (
-    <Providors session={session}>
-      <App>{children}</App>
-    </Providors>
+    <html lang="en">
+      <head>
+        <title>Vixel</title>
+      </head>
+      <body>
+        <App>{children}</App>
+      </body>
+    </html>
   );
 }

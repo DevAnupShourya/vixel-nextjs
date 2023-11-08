@@ -2,7 +2,7 @@
 import { usePathname } from "next/navigation";
 import { Button } from "@nextui-org/button";
 import { Badge } from "@nextui-org/badge";
-import Notification4LineIcon from "remixicon-react/Notification4LineIcon";
+import { IoNotificationsOutline } from "react-icons/io5";
 import Link from "next/link";
 
 // ? Local Components
@@ -47,7 +47,7 @@ export default function Navbar() {
               href="/notifications"
               color="secondary"
             >
-              <Notification4LineIcon />
+              <IoNotificationsOutline />
             </Button>
           </Badge>
         </div>

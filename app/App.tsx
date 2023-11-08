@@ -1,8 +1,4 @@
-"use client";
 import React from "react";
-
-// ? External Packages
-import { NextUIProvider } from "@nextui-org/react";
 
 // ? Local Components
 import { Spinner } from "@nextui-org/spinner";
@@ -10,28 +6,49 @@ import Dashboard from "@src/screens/Private/Dashboard/Dashboard";
 import Landing from "@src/screens/Public/Landing/Landing";
 import Notification from "@src/components/alerts/Notification";
 
-// ? Redux
-import type { RootState } from "@src/store/redux";
-import { useSelector } from "react-redux";
+// ? Global Provider
+import Providors from "./providors";
+import Check from "@src/components/BeClient";
+import BeServer from "@src/components/BeServer";
 
 // ? Next Auth
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
+
+import { useAppSelector } from "@src/utils/Hooks/reduxHook";
 
 export default function App({ children }: { children: React.ReactNode }) {
   // ? User Auth Session
-  const userSession = useSession();
-  // ? Redux States
-  const themeFromState = useSelector((state: RootState) => state.theme.mode);
+  // const userSession = useSession();
+  const themeState = useAppSelector((state) => state.theme.mode);
+
+  console.log("*********************");
+  console.log("App");
+  console.log("*********************");
 
   return (
-    <html lang="en">
-      <head>
-        <title>Vixel</title>
-      </head>
-      <body className={themeFromState}>
-        {/* // ? Next UI Providor */}
-        <NextUIProvider>
-          <Notification />
+    <Providors>
+        <section>
+          <hr />
+          <Check />
+          <hr />
+          <BeServer />
+          <hr />
+          <section>
+            <h1>Them : {themeState}</h1>
+            {/* {children} */}
+          </section>
+          <hr />
+        </section>
+    </Providors>
+  );
+}
+
+/**
+ * 
+      <Providors>
+        <section>
+ <section className={themeState}> 
+         <Notification />
           {userSession.status === "loading" ? (
             <Spinner
               label="Loading Plese Wait"
@@ -44,8 +61,8 @@ export default function App({ children }: { children: React.ReactNode }) {
           ) : (
             <Dashboard>{children}</Dashboard>
           )}
-        </NextUIProvider>
-      </body>
-    </html>
-  );
-}
+          <h1>Hello</h1>
+          {/* { children } 
+        </section>
+      </Providors>
+ */

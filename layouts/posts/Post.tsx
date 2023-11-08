@@ -1,8 +1,7 @@
-import Heart3LineIcon from "remixicon-react/Heart3LineIcon";
-import Chat1LineIcon from "remixicon-react/Chat1LineIcon";
-import ShareBoxFillIcon from "remixicon-react/ShareLineIcon";
-import Menu5LineIcon from "remixicon-react/Menu5LineIcon";
-import BarChart2LineIcon from "remixicon-react/BarChart2LineIcon";
+import {BsShare, BsSuitHeart} from "react-icons/bs";
+import { BiCommentDetail } from "react-icons/bi";
+import { AiOutlineBarChart } from "react-icons/ai";
+import { CiMenuKebab } from "react-icons/ci";
 
 import Link from "next/link";
 
@@ -37,7 +36,8 @@ export default function Post() {
         <Dropdown backdrop="opaque">
           <DropdownTrigger>
             <Button variant="light" isIconOnly color="default">
-              <Menu5LineIcon />
+              <CiMenuKebab />
+              {/* <RiMenu5Fill /> */}
             </Button>
           </DropdownTrigger>
           <DropdownMenu
@@ -68,28 +68,28 @@ export default function Post() {
             color="danger"
             className="text-light-default dark:text-dark-default hover:text-light-main hover:dark:text-dark-main transition-colors"
           >
-            <Heart3LineIcon />
+            <BsSuitHeart />
           </Button>
           <Button
             variant="light"
             color="success"
             className="text-light-default dark:text-dark-default hover:text-light-main hover:dark:text-dark-main transition-colors"
           >
-            <Chat1LineIcon />
+            <BiCommentDetail />
           </Button>
           <Button
             variant="light"
             color="warning"
             className="text-light-default dark:text-dark-default hover:text-light-main hover:dark:text-dark-main transition-colors"
           >
-            <ShareBoxFillIcon />
+            <BsShare />
           </Button>
           <Button
             variant="light"
             color="default"
             className="text-light-default dark:text-dark-default hover:text-light-main hover:dark:text-dark-main transition-colors"
           >
-            <BarChart2LineIcon />
+            <AiOutlineBarChart />
           </Button>
         </ButtonGroup>
       </CardFooter>

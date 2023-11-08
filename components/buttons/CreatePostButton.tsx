@@ -1,6 +1,6 @@
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
-import AddCircleLineIcon from 'remixicon-react/AddCircleLineIcon'
+import { BsFillPatchPlusFill } from "react-icons/bs";
 
 export default function CreatePostButton() {
   return (
@@ -12,7 +12,7 @@ export default function CreatePostButton() {
       href="/new"
       size="sm"
     >
-      <AddCircleLineIcon/>
+      <BsFillPatchPlusFill/>
     </Button>
   );
 }

@@ -18,4 +18,3 @@ export interface userDataInterface {
     coverImgSrc: string,
     avatarImgSrc: string,
 };
-
