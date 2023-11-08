@@ -1,58 +1,56 @@
 // ? For Navigation Data Set
 
-import Home2LineIcon from 'remixicon-react/Home2LineIcon';
-import CustomerService2FillIcon from 'remixicon-react/CustomerService2FillIcon';
-import MailFillIcon from 'remixicon-react/MailFillIcon';
-import AtLineIcon from 'remixicon-react/AtLineIcon';
+import { BiHomeSmile } from 'react-icons/bi';
+import { FaRegUser } from 'react-icons/fa6';
+import { RiCustomerService2Line } from 'react-icons/ri';
+import { BsMailbox , BsChatSquareDots } from 'react-icons/bs';
+import { ImFeed } from 'react-icons/im';
+import { HiOutlineFire } from 'react-icons/hi';
+import { TbUserStar } from 'react-icons/tb';
 
 export const MenuLinks = [
     {
         name: "Home",
         href: "/",
-        icon : Home2LineIcon,
+        icon : BiHomeSmile,
     },
     {
         name: "About",
         href: "/about",
-        icon : AtLineIcon,
+        icon : FaRegUser,
     },
     {
         name: "Contact",
         href: "/contact",
-        icon : CustomerService2FillIcon,
+        icon : RiCustomerService2Line,
     },
     {
         name: "Blogs",
         href: "/blogs",
-        icon : MailFillIcon,
+        icon : BsMailbox,
     }
 ];
-
-import Message3LineIcon from 'remixicon-react/Message3LineIcon';
-import RssFillIcon from 'remixicon-react/RssFillIcon';
-import FireLineIcon from 'remixicon-react/FireLineIcon';
-import User6FillIcon from 'remixicon-react/User6FillIcon';
 
 export const AuthMenuLinks = [
     {
         name: "Circle",
         href: "/feed",
-        icon: RssFillIcon,
+        icon: ImFeed,
     },
     {
         name: "Trending",
         href: "/trending",
-        icon: FireLineIcon,
+        icon: HiOutlineFire,
     },
     {
         name: "Follower",
         href: "/follower",
-        icon: User6FillIcon,
+        icon: TbUserStar,
     },
     {
         name: "Chats",
         href: "/chats",
-        icon: Message3LineIcon,
+        icon: BsChatSquareDots,
     }
 ];
 

@@ -2,14 +2,14 @@ import { Card, CardHeader, CardBody } from "@nextui-org/card";
 import { Button } from "@nextui-org/button";
 import { Divider } from "@nextui-org/divider";
 
-import CheckboxCircleFillIcon from "remixicon-react/CheckboxCircleFillIcon";
-import CloseCircleLineIcon from "remixicon-react/CloseCircleLineIcon";
-import ErrorWarningFillIcon from "remixicon-react/ErrorWarningFillIcon";
-import ErrorWarningLineIcon from "remixicon-react/ErrorWarningLineIcon";
-import InformationLineIcon from "remixicon-react/InformationLineIcon";
+import {RiCheckboxCircleFill} from "react-icons/ri";
+import {AiFillCloseCircle} from "react-icons/ai";
+import {MdErrorOutline} from "react-icons/md";
+import {BiSolidErrorAlt} from "react-icons/bi";
+import {BiError} from "react-icons/bi";
 
 // ? Redux
-import type { RootState } from "@src/store/redux";
+import type { RootState } from "@src/types/index";
 import { useSelector, useDispatch } from "react-redux";
 import { showAlert } from "@src/store/alert/alertSlice";
 
@@ -52,13 +52,13 @@ export default function Notification() {
               size="md"
             >
               {notification.type === "danger" ? (
-                <ErrorWarningLineIcon />
+                <BiSolidErrorAlt />
               ) : notification.type === "success" ? (
-                <CheckboxCircleFillIcon />
+                <RiCheckboxCircleFill />
               ) : notification.type === "warning" ? (
-                <ErrorWarningFillIcon />
+                <MdErrorOutline />
               ) : (
-                <InformationLineIcon />
+                <BiError />
               )}
             </Button>
             <Button
@@ -70,7 +70,7 @@ export default function Notification() {
               size="md"
               onClick={hideAlert}
             >
-              <CloseCircleLineIcon />
+              <AiFillCloseCircle />
             </Button>
           </CardHeader>
           <Divider />

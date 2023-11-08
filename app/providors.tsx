@@ -1,23 +1,26 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
-import type { Session } from "next-auth/core/types";
+import { NextUIProvider } from "@nextui-org/react";
 
-import { store } from "@src/store/redux";
-import { Provider } from "react-redux";
+import reduxStore from "@src/store/redux";
+import { Provider as ReduxProvider } from "react-redux";
 
-export default function Providors({
-  children,
-  session,
-}: {
-  children: React.ReactNode;
-  session: Session;
-}) {
+export default function Providors({ children }: { children: React.ReactNode }) {
+  console.log("*********************");
+  console.log("Providors : Clients");
+  console.log("*********************");
+
   return (
-    // ? Next Auth Providor
-    <SessionProvider session={session}>
-      {/* // ? Redux Providor */}
-      <Provider store={store}>{children}</Provider>
+    <SessionProvider>
+      <h1>SessionProvider</h1>
+      <NextUIProvider>
+        <h1>NextUIProvider</h1>
+        <ReduxProvider store={reduxStore}>
+          <h1>Redux Provider</h1>
+          {children}
+        </ReduxProvider>
+      </NextUIProvider>
     </SessionProvider>
   );
 }

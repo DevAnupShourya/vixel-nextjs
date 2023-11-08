@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { RootState } from "@src/store/redux";
+import type { RootState } from "@src/types/index";
 import { useSelector, useDispatch } from "react-redux";
 import { showAlert } from "@src/store/alert/alertSlice";
 
